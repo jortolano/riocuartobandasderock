@@ -1,12 +1,11 @@
 package ar.edu.unrc.exa.dc.dose2016.riocuartobandasderock.model;
 
+import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -27,10 +26,6 @@ public class Song {
 	* album represents the album where the song belongs
 	*/
 	
-	@ManyToOne(optional = false)
-	@JoinColumn(name = "id")
-
-
 	@Id
 	@Column(name = "idSong")
 	private String id;
@@ -40,10 +35,6 @@ public class Song {
 
 	@Column(name = "duration")
 	private int duration;
-	
-	@ManyToOne
-    @JoinColumn(name="id")
-	private Album album;
 	
 	/**
 	 * Default constructor of class song
@@ -75,6 +66,21 @@ public class Song {
 	
 
 // Seters and geters of the method song............
+	
+	
+	/**
+	 * @return a valid object of song
+	 */
+	public boolean repOk(){
+		boolean isValid=false;
+		if(nameSong != "" && nameSong != null && duration > 0){
+			isValid=true;
+		}
+		else {
+			throw new IllegalArgumentException("the name and duration whe are not meets the necesary requirements of song ");
+	}
+		return isValid;
+	}
 	
 	/**
 	 * @return the id of the song
